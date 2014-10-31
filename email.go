@@ -101,7 +101,7 @@ func (m *Message) Bytes() []byte {
 	boundary := "f46d043c813270fc6b04c2d223da"
 
 	if len(m.Attachments) > 0 {
-		buf.WriteString("Content-Type: multipart/mixed; boundary=" + boundary + "\n")
+		buf.WriteString("Content-Type: multipart/mixed; boundary=" + boundary + "\n\n")
 		buf.WriteString("--" + boundary + "\n")
 	}
 
