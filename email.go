@@ -25,6 +25,7 @@ type Message struct {
 	To              []string
 	Cc              []string
 	Bcc             []string
+	ReturnPath      string
 	Subject         string
 	Body            string
 	BodyContentType string
@@ -89,6 +90,10 @@ func (m *Message) Tolist() []string {
 
 func (m *Message) Bytes() []byte {
 	buf := bytes.NewBuffer(nil)
+
+	if len(m.ReturnPath) > 0 {
+		buf.WriteString("Return-Path: " + m.ReturnPath + "\n")
+	}
 
 	buf.WriteString("From: " + m.From + "\n")
 	buf.WriteString("To: " + strings.Join(m.To, ",") + "\n")
